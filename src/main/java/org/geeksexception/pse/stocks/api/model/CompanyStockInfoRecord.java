@@ -1,14 +1,6 @@
 package org.geeksexception.pse.stocks.api.model;
 
-import java.util.Calendar;
 import java.util.Date;
-import java.util.TimeZone;
-
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.PrePersist;
 
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonPropertyOrder;
@@ -17,7 +9,6 @@ import org.codehaus.jackson.map.annotate.JsonSerialize;
 import org.geeksexception.pse.stocks.api.deserializer.CustomJsonDateDeserializer;
 import org.geeksexception.pse.stocks.api.deserializer.CustomJsonDoubleDeserializer;
 
-@Entity
 @JsonSerialize(include = JsonSerialize.Inclusion.NON_NULL)
 @JsonPropertyOrder({
 	"headerSqLow",
@@ -39,9 +30,7 @@ import org.geeksexception.pse.stocks.api.deserializer.CustomJsonDoubleDeserializ
 })
 public class CompanyStockInfoRecord {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private String id;
 	
 	@JsonProperty("headerSqLow")
 	@JsonDeserialize(using = CustomJsonDoubleDeserializer.class)
@@ -108,22 +97,17 @@ public class CompanyStockInfoRecord {
 	
 	private Date dateCreated;
 	
-	@PrePersist
-	public void prePersist() {		
-		dateCreated = Calendar.getInstance(TimeZone.getTimeZone("Asia/Singapore")).getTime();
-	}
-	
 	/**
 	 * @return the id
 	 */
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

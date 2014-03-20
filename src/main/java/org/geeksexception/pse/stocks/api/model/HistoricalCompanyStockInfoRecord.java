@@ -2,11 +2,6 @@ package org.geeksexception.pse.stocks.api.model;
 
 import java.util.Date;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 import org.codehaus.jackson.annotate.JsonProperty;
 import org.codehaus.jackson.annotate.JsonPropertyOrder;
 import org.codehaus.jackson.map.annotate.JsonDeserialize;
@@ -14,7 +9,6 @@ import org.geeksexception.pse.stocks.api.deserializer.CustomJsonDateDeserializer
 import org.geeksexception.pse.stocks.api.deserializer.CustomJsonDoubleDeserializer;
 import org.geeksexception.pse.stocks.api.deserializer.CustomJsonLongDeserializer;
 
-@Entity
 @JsonPropertyOrder({
 	"sqLow",
 	"sqOpen",
@@ -32,9 +26,7 @@ import org.geeksexception.pse.stocks.api.deserializer.CustomJsonLongDeserializer
 })
 public class HistoricalCompanyStockInfoRecord {
 	
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private String id;
 	
 	@JsonProperty("sqLow")
 	@JsonDeserialize(using = CustomJsonDoubleDeserializer.class)
@@ -90,14 +82,14 @@ public class HistoricalCompanyStockInfoRecord {
 	/**
 	 * @return the id
 	 */
-	public Long getId() {
+	public String getId() {
 		return id;
 	}
 
 	/**
 	 * @param id the id to set
 	 */
-	public void setId(Long id) {
+	public void setId(String id) {
 		this.id = id;
 	}
 

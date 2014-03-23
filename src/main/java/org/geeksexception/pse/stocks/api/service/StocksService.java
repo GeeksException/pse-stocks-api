@@ -1,5 +1,6 @@
 package org.geeksexception.pse.stocks.api.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.geeksexception.pse.stocks.api.model.CompanyStockInfo;
@@ -53,7 +54,7 @@ public class StocksService {
 				StockHistorySummary.class);
 		log.debug("{}", summary);
 		
-		return summary;
+		return summary == null ? new ArrayList<StockHistorySummary>() : summary;
 		
 	}
 	
@@ -81,11 +82,12 @@ public class StocksService {
 				stockRecord.getListedCompanyId(), stockRecord.getSecurityId());
 		log.debug("findBySymbol: {}", companyInfo);
 		
-		CompanyStockInfoRecord companyStockInfo = jsonUtil.readValueFromJsonString(companyInfo, CompanyStockInfo.class)
-				.getStockHistoryRecords().get(0);
-		log.debug("{}", companyStockInfo);
+		CompanyStockInfo companyStockInfo = jsonUtil.readValueFromJsonString(companyInfo, CompanyStockInfo.class);
+		CompanyStockInfoRecord companyStockInfoRecord = 
+				companyStockInfo == null ? new CompanyStockInfoRecord() : companyStockInfo.getStockHistoryRecords().get(0);
+		log.debug("{}", companyStockInfoRecord);
 		
-		return companyStockInfo;
+		return companyStockInfoRecord;
 		
 	}
 	
